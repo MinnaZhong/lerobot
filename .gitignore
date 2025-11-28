@@ -177,3 +177,6 @@ outputs/
 *.urdf
 *.xml
 *.part
+
+# Ufactory
+src/lerobot/ufactory_usage/src

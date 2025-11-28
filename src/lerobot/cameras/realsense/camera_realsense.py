@@ -215,7 +215,7 @@ class RealSenseCamera(Camera):
             camera_info = {
                 "name": device.get_info(rs.camera_info.name),
                 "type": "RealSense",
-                "id": device.get_info(rs.camera_info.serial_number),
+                "serial_number": device.get_info(rs.camera_info.serial_number), # UF Jason changed key from 'id' to 'serial_number'
                 "firmware_version": device.get_info(rs.camera_info.firmware_version),
                 "usb_type_descriptor": device.get_info(rs.camera_info.usb_type_descriptor),
                 "physical_port": device.get_info(rs.camera_info.physical_port),

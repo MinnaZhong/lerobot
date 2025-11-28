@@ -1,0 +1,4 @@
+# for spnav space mouse python3 integration (ref diffusion policy)    
+spnav @ https://github.com/cheng-chi/spnav/archive/c1c938ebe3cc542db4685e0d13850ff1abfdb943.tar.gz
+# keep original codebase structure, will install locally in this_dir/src
+-e git+https://github.com/wuphilipp/gello_software.git@06865d962b11e2b1d2144cc2d2c5418b9678c465#egg=gello
