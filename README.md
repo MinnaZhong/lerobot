@@ -5,6 +5,17 @@
 Please make sure you have properly followed the official installation (**from source**: `pip install -e .`) procedure below, and properly setup the conda environment with all required dependent packages installed. Then please **check further instructions** in [ufactory_usage](./src/lerobot/ufactory_usage) directory. 
 
 
+## Acknowledgement:
+
+The Integration work in this repo is inspired by original code from other talented works, including:
+
+1. [Gello Software](https://github.com/wuphilipp/gello_software): it is what `gello_xarm7` part depends on, especially for low level interface, configuration and offset calibration.
+2. [Diffusion Policy](https://github.com/real-stanford/diffusion_policy): algorithm, hyperparameters and space mouse control etc;
+3. [ACT](https://tonyzhaozh.github.io/aloha/): algorithm and hyperparameters etc;
+4. Lerobot framework: which makes data collection, training and evaluation a lot easier.
+
+Special thanks to the works above and contributions from the AI robotics open-source community.
+
 <p align="center">
   <img alt="LeRobot, Hugging Face Robotics Library" src="https://raw.githubusercontent.com/huggingface/lerobot/main/media/lerobot-logo-thumbnail.png" width="100%">
   <br/>
