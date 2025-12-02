@@ -2,7 +2,7 @@
 
 &ensp;&ensp;&ensp;&ensp;Please use this LeRobot codebase instead if you wish to use UFACTORY robots to do data collection under LeRobot framework, we have written the proper interface to our robot hardware, as well as teleoperators such as [gello](https://wuphilipp.github.io/gello_site/) (for xArm7) and the [3Dconnexion](https://3dconnexion.com/) space mouse (2D control as in [Diffusion Policy](https://diffusion-policy.cs.columbia.edu/) PushT task)
 
-Please make sure you have properly followed the official installation (**from source**: `pip install -e .`) procedure below, and properly setup the conda environment with all required dependent packages installed. Then please **check further instructions** in [ufactory_usage](./src/lerobot/ufactory_usage) directory. 
+Please make sure you have properly followed the LeRobot official installation (**from source**: `pip install -e .`) procedure below, and properly setup the conda environment with all required dependent packages installed. Then please **check further detailed instructions** in [ufactory_usage](./src/lerobot/ufactory_usage) directory. 
 
 
 ## Acknowledgement:
@@ -12,7 +12,7 @@ The Integration work in this repo is inspired by original code from other talent
 1. [Gello Software](https://github.com/wuphilipp/gello_software): it is what `gello_xarm7` part depends on, especially for low level interface, configuration and offset calibration.
 2. [Diffusion Policy](https://github.com/real-stanford/diffusion_policy): algorithm, hyperparameters and space mouse control etc;
 3. [ACT](https://tonyzhaozh.github.io/aloha/): algorithm and hyperparameters etc;
-4. Lerobot framework: which makes data collection, training and evaluation a lot easier.
+4. LeRobot framework: which makes data collection, training and evaluation a lot easier.
 
 Special thanks to the works above and contributions from the AI robotics open-source community.
 
