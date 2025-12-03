@@ -112,6 +112,11 @@ class UFRobot(Robot, Thread):
             print(f"UF Robot connection Failed, please check the hardware availability at ip: {self.config.robot_ip}")
             raise ConnectionError()
 
+        if not self._dof == self.real_arm.axis:
+            print(f"[ERROR: ] Real Robot DOF({self.real_arm.axis}) does not match configuration ({self._dof})!")
+            self._is_connected = False
+            raise ConnectionError()
+
         for cam in self.cameras.values():
             cam.connect()
             self._is_connected = self._is_connected and cam.is_connected

@@ -123,6 +123,8 @@ def record_loop(
 
     timestamp = 0
     last_robot_cmd = robot.get_observation()
+    # only positional cmd for now: Remove velo from observation for cmd if needed!
+    last_robot_cmd = { k: v for k,v in last_robot_cmd.items() if not "vel" in k }
     start_episode_t = time.perf_counter() # 系统级高精度timer,适合记录相对时间
     while timestamp < control_time_s:
         start_loop_t = time.perf_counter()
@@ -294,6 +296,7 @@ def record(cfg: RecordConfig) -> LeRobotDataset:
 
 
 ### UF Edit: Added yaml config: 
+import argparse
 import importlib
 import yaml
 

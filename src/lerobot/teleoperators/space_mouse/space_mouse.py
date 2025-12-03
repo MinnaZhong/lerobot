@@ -27,6 +27,7 @@ class SpaceMouseTeleop(Teleoperator, Thread):
         self.config = config
         self.max_value = config.max_value
         self.frequency = config.frequency
+        self.max_pos_speed = config.max_pos_speed
         deadzone = config.deadzone
         self._is_connected = False
         self.dtype = np.float32 # CHECK! make it configurable ???
@@ -156,10 +157,10 @@ class SpaceMouseTeleop(Teleoperator, Thread):
         # self._drain_pressed_keys()
         sm_state = self.get_motion_state_transformed()
 
-        dpos = sm_state[:3] * 250.0 / self.frequency  # (env.max_pos_speed / frequency)
+        dpos = sm_state[:3] * self.max_pos_speed / self.frequency
             
         # Currently No rotation operation 
-        # drot_xyz = sm_state[3:] * (env.max_rot_speed / frequency)
+        # drot_xyz = sm_state[3:] * (max_rot_speed / frequency)
         
         # if not self.is_button_pressed(0):
         #     # translation mode

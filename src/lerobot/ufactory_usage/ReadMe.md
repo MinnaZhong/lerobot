@@ -28,7 +28,7 @@ Then the output result (joint offset and gripper offset) can be set to the `tele
 The space mouse currently is configured as **2D control** (in XY plane) for Push T block task, if you need more freedom, check and edit the interface in `teleoperators/space_mouse/space_mouse.py`.  
 
 ## 3. Lerobot Data Recording with above devices:
-Please use provided `record_uf_edit.py` script in this directory instead of lerobot_record.py in scripts folder. We have made modifications for space mouse data collection (delta command to absolute command) and enabled using external yaml file as flexible configuration. Check the two `*_record_config.yaml` files here and change the filename used in `record_uf_edit.py`.
+Please use provided `record_uf_edit.py` script in this directory instead of lerobot_record.py in scripts folder. We have made modifications for space mouse data collection (delta command to absolute command) and enabled using external yaml file as flexible configuration. Check the two `*_record_config.yaml` files here and specify correct filename executing `record_uf_edit.py`.
 
 ## 4. Example commandline instructions:
 
