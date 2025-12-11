@@ -17,9 +17,23 @@ Setup and power on the gello dummy robot, hold it with a **known real joint conf
 
 ```
 $ conda activate gello #(configured according to gello ReadMe installation requirements)
-$ python gello_get_offset.py --port /dev/ttyUSB0 --start_joints 0 0 0 1.5708 0 1.5708 0 --joint_signs 1 1 1 1 1 1 1
+(gello) $ python gello_get_offset.py --port /dev/ttyUSB0 --start_joints 0 0 0 1.5708 0 1.5708 0 --joint_signs 1 1 1 1 1 1 1
 ```
+For example, if corresponding output is:
+```
+Attempting to initialize Dynamixel driver (attempt 1/3)
+Successfully initialized Dynamixel driver on /dev/ttyUSB0
 
+best offsets               :  ['0.000', '3.142', '0.000', '1.571', '6.283', '1.571', '4.712']
+best offsets function of pi: [0*np.pi/2, 2*np.pi/2, 0*np.pi/2, 1*np.pi/2, 4*np.pi/2, 1*np.pi/2, 3*np.pi/2 ]
+gripper open (degrees)        113.618359375
+gripper close (degrees)       71.818359375
+```
+Then you should config `gello_xarm7` (like in the yaml config file) as:
+```
+joint_offset_ints: [0, 2, 0, 1, 4, 1, 3] # according to 'best offsets function of pi'
+gripper_config: [8, 113, 71] # (gripper_id， open, close)
+```
 Then the output result (joint offset and gripper offset) can be set to the `teleoperators/gello_xarm7` configuration. 
 
 
@@ -42,9 +56,15 @@ python record_uf_edit.py --config xarm7_gello_record_config.yaml
 ```
 Recording with xarm7 and space mouse (and **Resume** recording on existing dataset):
 ```shell
-python record_uf_edit.py --config xarm7_gello_record_config.yaml --resume
+python record_uf_edit.py --config xarm7_spacemouse_record_config.yaml --resume
 
 ```
+**Keyboard control** for data recording:  
+
+“`->`” Exit early: Finish current episode, save and enter reset process for next episode preparation；  
+"`<-`" rerecord_episode + Exit early: Terminate current recording, reset and then re-record this episode；  
+"`Esc`" stop_recording + Exit early: Save current recording and exit recording process；  
+
 ### 4.2 Training
 
 Use official script for training, here use `diffusion` model and resume training option as example, edit or remove arguments based on your case:
