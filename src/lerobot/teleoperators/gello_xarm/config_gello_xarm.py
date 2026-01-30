@@ -17,3 +17,4 @@ class GelloxArmConfig(TeleoperatorConfig):
     joint_signs: Tuple[int, ...] = (1, 1, 1, 1, 1, 1, 1) # if follow the original open-sourced gello xarm7 setup
     start_joints: Tuple[float, ...] = (0, 0, 0, np.pi/2, 0, np.pi/2, 0)
     gripper_id: int = 8  # -1: no gripper
+    torque_joint_ids: Tuple[int, ...] = None  # the joints will activate torque mode.

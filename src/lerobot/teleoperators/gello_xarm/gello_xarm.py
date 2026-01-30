@@ -37,7 +37,6 @@ class GelloxArm(Teleoperator):
         for _ in range(10):
             driver.get_joints()  # warmup
         curr_joints = driver.get_joints()
-        driver.set_torque_mode(False)
         driver.close()
         joint_offsets = []
         for i in range(len(self.config.start_joints)):
@@ -58,10 +57,8 @@ class GelloxArm(Teleoperator):
         print(self._dynamixel_robo_config)
         self.dof = len(self.config.start_joints)
 
-        all_joint_ids = list(range(1, 9))
-        disable_joint_ids = list(set(all_joint_ids) ^ set(joint_ids))
-        if disable_joint_ids:
-            driver = DynamixelDriver(disable_joint_ids, port=self.config.port, baudrate=57600)
+        if self.config.torque_joint_ids:
+            driver = DynamixelDriver(self.config.torque_joint_ids, port=self.config.port, baudrate=57600)
             driver.set_torque_mode(True)
             driver.close()
 
