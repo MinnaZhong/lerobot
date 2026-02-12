@@ -73,7 +73,6 @@ def eval(cfg: EvalConfig):
         cfg.teleop.rx_continuous = False
 
     logging.info(pformat(asdict(cfg)))
-    exit(0)
 
     robot = make_robot_from_config(cfg.robot)
     teleop = make_teleoperator_from_config(cfg.teleop)
