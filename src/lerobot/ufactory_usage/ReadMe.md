@@ -258,16 +258,12 @@ lerobot-edit-dataset \
 ```
 
 ### Merge Datasets
-```python
-from lerobot.datasets.aggregate import aggregate_datasets
-
-aggregate_datasets(
-  repo_ids=[
-    "ufactory/xarm7_record_datas_1",
-    "ufactory/xarm7_record_datas_2"
-  ],
-  aggr_repo_id="ufactory/xarm7_record_datas_merge_1_2"
-)
+```bash
+lerobot-edit-dataset \
+  --root=../../../../lerobot_datas/record \
+  --repo_id ufactory/xarm7_record_datas_merge_1_2 \
+  --operation.type merge \
+  --operation.repo_ids "['ufactory/xarm7_record_datas_1', 'ufactory/xarm7_record_datas_2']"
 ```
 
 

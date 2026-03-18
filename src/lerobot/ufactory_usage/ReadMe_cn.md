@@ -255,15 +255,12 @@ lerobot-edit-dataset \
 ```
 
 ### 合并数据集
-```python
-from lerobot.datasets.aggregate import aggregate_datasets
-
-aggregate_datasets(
-  repo_ids=["ufactory/xarm7_record_datas_1", "ufactory/xarm7_record_datas_2"], # 待合并的数据集ID或本地路径
-  aggr_repo_id="ufactory/xarm7_record_datas_merge_1_2", # 合并后数据集的名称
-  # data_files_size_in_mb=200,         # 每个数据文件最大200MB
-  # video_files_size_in_mb=500         # 每个视频文件最大500MB
-)
+```bash
+lerobot-edit-dataset \
+  --root=../../../../lerobot_datas/record \
+  --repo_id ufactory/xarm7_record_datas_merge_1_2 \
+  --operation.type merge \
+  --operation.repo_ids "['ufactory/xarm7_record_datas_1', 'ufactory/xarm7_record_datas_2']"
 ```
 
 ### 8.重要提示

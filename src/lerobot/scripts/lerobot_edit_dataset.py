@@ -244,7 +244,14 @@ def handle_merge(cfg: EditDatasetConfig) -> None:
         raise ValueError("repo_id must be specified as the output repository for merged dataset")
 
     logging.info(f"Loading {len(cfg.operation.repo_ids)} datasets to merge")
-    datasets = [LeRobotDataset(repo_id, root=cfg.root) for repo_id in cfg.operation.repo_ids]
+    datasets = []
+    for repo_id in cfg.operation.repo_ids:
+        if cfg.root and not str(cfg.root).endswith(repo_id):
+            root = Path(cfg.root).expanduser() / repo_id
+        else:
+            root = cfg.root
+        datasets.append(LeRobotDataset(repo_id, root=root))
+    # datasets = [LeRobotDataset(repo_id, root=cfg.root) for repo_id in cfg.operation.repo_ids]
 
     output_dir = Path(cfg.root) / cfg.repo_id if cfg.root else HF_LEROBOT_HOME / cfg.repo_id
 
