@@ -23,7 +23,6 @@ from lerobot.robots import (  # noqa: F401
     Robot,
     RobotConfig,
     make_robot_from_config,
-    ufactory_robot
 )
 from lerobot.utils.control_utils import (
     is_headless,

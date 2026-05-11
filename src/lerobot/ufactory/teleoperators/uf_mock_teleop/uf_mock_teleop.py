@@ -16,7 +16,7 @@ from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnected
 from collections import defaultdict
 
 from lerobot.teleoperators import Teleoperator
-from .config_ufactory_mock import UFactoryMockConfig
+from .config_uf_mock_teleop import UFMockTeleopConfig
 
 RECORD_NONE = 0
 RECORD_POSE = RECORD_NO_GRIPPER = 1
@@ -24,12 +24,12 @@ RECORD_GRIPPER = 2
 RECORD_POSE_GRIPPER = RECORD_POSE | RECORD_GRIPPER
 
 
-class UFactoryMockTeleop(Teleoperator, threading.Thread):
+class UFMockTeleop(Teleoperator, threading.Thread):
     
-    config_class = UFactoryMockConfig
-    name = "ufactory_mock"
+    config_class = UFMockTeleopConfig
+    name = "Mock Teleop For xArm"
 
-    def __init__(self, config: UFactoryMockConfig):
+    def __init__(self, config: UFMockTeleopConfig):
         
         super().__init__(config)
         threading.Thread.__init__(self) # Do NOT REMOVE!
@@ -437,7 +437,7 @@ class UFactoryMockTeleop(Teleoperator, threading.Thread):
     def get_action(self) -> dict[str, Any]:
         if not self.is_connected:
             raise DeviceNotConnectedError(
-                "UFactoryMockTeleop is not connected. You need to run `connect()` before `get_action()`."
+                "UFMockTeleop is not connected. You need to run `connect()` before `get_action()`."
             )
         
         if not self._action_datas:

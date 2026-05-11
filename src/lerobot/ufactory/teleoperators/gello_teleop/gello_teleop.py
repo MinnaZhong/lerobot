@@ -4,25 +4,24 @@ import sys
 import logging
 import time
 import numpy as np
-
 from lerobot.teleoperators import Teleoperator
-from .config_gello_xarm import GelloxArmConfig
 from gello.dynamixel.driver import DynamixelDriver
 from gello.agents.gello_agent import GelloAgent, DynamixelRobotConfig
 from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnectedError
+from .config_gello_teleop import GelloTeleopConfig
 
 
 logger = logging.getLogger(__name__)
 
-class GelloxArm(Teleoperator):
+class GelloTeleop(Teleoperator):
     """
     GELLO for xArm tele-op, ref: https://wuphilipp.github.io/gello_site/
     """
 
-    config_class = GelloxArmConfig
-    name = "gello_xarm"
+    config_class = GelloTeleopConfig
+    name = "Gello Teleop For xArm"
 
-    def __init__(self, config: GelloxArmConfig):
+    def __init__(self, config: GelloTeleopConfig):
         super().__init__(config)
         self.config = config
         self._is_connected = False

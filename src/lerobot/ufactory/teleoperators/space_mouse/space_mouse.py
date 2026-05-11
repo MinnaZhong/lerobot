@@ -17,7 +17,7 @@ from .config_space_mouse import SpaceMouseTeleopConfig
 class SpaceMouseTeleop(Teleoperator, Thread):
     
     config_class = SpaceMouseTeleopConfig
-    name = "space_mouse"
+    name = "Space Mouse Teleop For xArm"
 
     def __init__(self, config: SpaceMouseTeleopConfig):
         

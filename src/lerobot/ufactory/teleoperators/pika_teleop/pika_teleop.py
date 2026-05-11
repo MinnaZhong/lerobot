@@ -9,12 +9,10 @@ import numpy as np
 from typing import Any
 from threading import Thread, Event, Lock
 from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnectedError
-
 from xarm.wrapper import XArmAPI
-
 from lerobot.teleoperators import Teleoperator
-from .config_pika_xarm import PikaxArmConfig
-from .pika_device import PikaDevice
+from lerobot.ufactory.devices.pika import PikaDevice
+from .config_pika_teleop import PikaTeleopConfig
 
 
 class Transformations:
@@ -137,12 +135,12 @@ class Transformations:
         return axis * theta
 
 
-class PikaxArm(Teleoperator, Thread):
+class PikaTeleop(Teleoperator, Thread):
     
-    config_class = PikaxArmConfig
-    name = "pika_teleop"
+    config_class = PikaTeleopConfig
+    name = "Pika Teleop For xArm"
 
-    def __init__(self, config: PikaxArmConfig):
+    def __init__(self, config: PikaTeleopConfig):
         
         super().__init__(config)
         Thread.__init__(self) # Do NOT REMOVE!

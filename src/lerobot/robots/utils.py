@@ -64,10 +64,9 @@ def make_robot_from_config(config: RobotConfig) -> Robot:
         from tests.mocks.mock_robot import MockRobot
 
         return MockRobot(config)
-    elif config.type == "uf_robot":
-        from .ufactory_robot import UFRobot
-
-        return UFRobot(config)
+    elif config.type.startswith("uf::"):
+        from lerobot.ufactory.robots.utils import make_uf_robot_from_config
+        return make_uf_robot_from_config(config)
     else:
         try:
             return cast(Robot, make_device_from_device_class(config))

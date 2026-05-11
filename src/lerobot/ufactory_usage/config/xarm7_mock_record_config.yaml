@@ -1,5 +1,5 @@
 RobotConfig:
-  _target_: lerobot.robots.ufactory_robot.UFRobotConfig
+  _target_: lerobot.ufactory.robots.uf_robot.UFRobotConfig
   id: "lab"
   robot_ip: "192.168.1.85"
   robot_dof: 7
@@ -19,7 +19,7 @@ DatasetRecordConfig:
 
 # make sure to edit with your correct configurations!
 TeleoperatorConfig:
-  _target_: lerobot.teleoperators.ufactory_mock.UFactoryMockConfig
+  _target_: lerobot.ufactory.teleoperators.uf_mock_teleop.UFMockTeleopConfig
   robot_ip: "192.168.1.85"
   control_space: "joint"    # joint/cartesian
   fps: 30  # Hz

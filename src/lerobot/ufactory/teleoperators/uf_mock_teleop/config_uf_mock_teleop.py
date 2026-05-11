@@ -20,9 +20,9 @@ from dataclasses import dataclass
 from lerobot.teleoperators import TeleoperatorConfig
 
 
-@TeleoperatorConfig.register_subclass("ufactory_mock")
+@TeleoperatorConfig.register_subclass("uf::mock_teleop")
 @dataclass
-class UFactoryMockConfig(TeleoperatorConfig):
+class UFMockTeleopConfig(TeleoperatorConfig):
     robot_ip: str = "192.168.1.127"
     control_space: str = "joint"    # joint/cartesian
     mock_type: int = 1

@@ -6,9 +6,9 @@ from typing import Tuple
 from lerobot.teleoperators import TeleoperatorConfig
 
 
-@TeleoperatorConfig.register_subclass("gello_xarm")
+@TeleoperatorConfig.register_subclass("uf::gello_teleop")
 @dataclass
-class GelloxArmConfig(TeleoperatorConfig):
+class GelloTeleopConfig(TeleoperatorConfig):
     # Port to connect to the gello dummy arm
     port: str = "/dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FTAJZYC7-if00-port0"
 

@@ -4,14 +4,8 @@ import importlib
 import math
 from pathlib import Path
 from lerobot.scripts.lerobot_record import *
-from lerobot.teleoperators import (
-    gello_xarm,
-    space_mouse,
-    ufactory_mock
-)
-from lerobot.teleoperators.ufactory_mock import UFactoryMockTeleop
-from lerobot.teleoperators.pika_xarm import PikaxArm
-from lerobot.robots import ufactory_robot
+from lerobot.ufactory.teleoperators.uf_mock_teleop import UFMockTeleop
+from lerobot.ufactory.teleoperators.pika_teleop import PikaTeleop
 
 
 # recursive call, inspired from gello_software:
@@ -112,7 +106,7 @@ def record(cfg: RecordConfig) -> LeRobotDataset:
 
     print("\n********** Episode Record Loop Start **********")
 
-    if isinstance(teleop, PikaxArm):
+    if isinstance(teleop, PikaTeleop):
         if getattr(cfg.robot, 'rx_continuous', False):
             def frame_callback(frame):
                 if frame['action'][3] < 0:
@@ -132,7 +126,7 @@ def record(cfg: RecordConfig) -> LeRobotDataset:
     with VideoEncodingManager(dataset):
         recorded_episodes = 0
         while recorded_episodes < cfg.dataset.num_episodes and not events["stop_recording"]:
-            if teleop is not None and isinstance(teleop, UFactoryMockTeleop):
+            if teleop is not None and isinstance(teleop, UFMockTeleop):
                 if events["stop_recording"]:
                     continue
                 teleop.configure(events=events)
@@ -167,12 +161,12 @@ def record(cfg: RecordConfig) -> LeRobotDataset:
                 log_say("Re-record episode", cfg.play_sounds)
                 events["rerecord_episode"] = False
                 events["exit_early"] = False
-                if isinstance(teleop, PikaxArm):
+                if isinstance(teleop, PikaTeleop):
                     teleop.set_ctrl_status(False)
                 dataset.clear_episode_buffer()
                 input('\nPress Enter to rerecord this episode >>>>> ')
 
-                if isinstance(teleop, PikaxArm):
+                if isinstance(teleop, PikaTeleop):
                     robot.configure()
                     time.sleep(0.5)
                     teleop.set_ctrl_status(True)
@@ -180,12 +174,12 @@ def record(cfg: RecordConfig) -> LeRobotDataset:
                 continue
 
             if not events['stop_recording']:
-                if isinstance(teleop, PikaxArm):
+                if isinstance(teleop, PikaTeleop):
                     teleop.set_ctrl_status(False)
                 dataset.save_episode()
                 recorded_episodes += 1
                 input('Press Enter to record at the next episode >>>>> ')
-                if isinstance(teleop, PikaxArm):
+                if isinstance(teleop, PikaTeleop):
                     robot.configure()
                     time.sleep(1)
                     teleop.set_ctrl_status(True)

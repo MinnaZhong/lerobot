@@ -4,15 +4,13 @@ import time
 import math
 import logging
 import numpy as np
-from lerobot.cameras.utils import make_cameras_from_configs
-
-from lerobot.robots import Robot
-from .config_uf_robot import UFRobotConfig
-
-from xarm.wrapper import XArmAPI
 from threading import Thread, Event, Lock
-from .uf_report_utils import *
-from lerobot.teleoperators.pika_xarm.pika_device import PikaDevice
+from lerobot.robots import Robot
+from lerobot.cameras.utils import make_cameras_from_configs
+from lerobot.ufactory.devices.pika import PikaDevice
+from .config_uf_robot import UFRobotConfig
+from xarm.wrapper import XArmAPI
+from xarm.core.utils import convert
 
 ## Configurations:
 INIT_SYNC_JOINT_VELOCITY_RAD = 0.2
@@ -359,7 +357,7 @@ class UFRobot(Robot, Thread):
         print(buffer)
         while len(buffer) < 4:
             buffer += sock.recv(4 - len(buffer))
-        size = bytes_to_u32(buffer[:4])
+        size = convert.bytes_to_u32(buffer[:4])
         print(f"UFACTORY Robot ({self.config.robot_ip}) RT Report Thread starts!! =======")
         while not self.report_stop_event.is_set():
             buffer += sock.recv(size - len(buffer))
@@ -368,12 +366,12 @@ class UFRobot(Robot, Thread):
             data = buffer[:size]
             buffer = buffer[size:]
             with self._update_lock:
-                self.rt_actual_joint_pos = bytes_to_fp32_list(data[116:144])
-                self.rt_actual_joint_speed = bytes_to_fp32_list(data[144:172])
-                self.rt_cmd_tcp_pose = bytes_to_fp32_list(data[424:448])
-                self.rt_cmd_tcp_vel = bytes_to_fp32_list(data[448:472])
-                self.rt_actual_tcp_pose = bytes_to_fp32_list(data[472:496])
-                self.rt_actual_tcp_speed = bytes_to_fp32_list(data[496:520])
+                self.rt_actual_joint_pos = convert.bytes_to_fp32s(data[116:144], 7)
+                self.rt_actual_joint_speed = convert.bytes_to_fp32s(data[144:172], 7)
+                self.rt_cmd_tcp_pose = convert.bytes_to_fp32s(data[424:448], 6)
+                self.rt_cmd_tcp_vel = convert.bytes_to_fp32s(data[448:472], 6)
+                self.rt_actual_tcp_pose = convert.bytes_to_fp32s(data[472:496], 6)
+                self.rt_actual_tcp_speed = convert.bytes_to_fp32s(data[496:520], 6)
             self._rt_report_normal = True
 
         self._rt_report_normal = False

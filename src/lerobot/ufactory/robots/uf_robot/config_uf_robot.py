@@ -7,7 +7,7 @@ from lerobot.cameras.realsense import RealSenseCameraConfig
 
 from lerobot.robots import RobotConfig
 
-@RobotConfig.register_subclass("uf_robot")
+@RobotConfig.register_subclass("uf::robot")
 @dataclass
 class UFRobotConfig(RobotConfig):
     # cameras

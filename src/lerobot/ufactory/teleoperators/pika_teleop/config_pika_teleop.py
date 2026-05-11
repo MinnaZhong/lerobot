@@ -19,13 +19,14 @@ from dataclasses import dataclass
 from lerobot.teleoperators import TeleoperatorConfig
 
 
-@TeleoperatorConfig.register_subclass("space_mouse")
+@TeleoperatorConfig.register_subclass("uf::pika_teleop")
 @dataclass
-class SpaceMouseTeleopConfig(TeleoperatorConfig):
-    # Port to connect to the arm
-    max_value: int = 300
-    deadzone: tuple = (0,0,0,0,0,0)
-    use_gripper: bool = False
-    frequency: int = 10 # hz
-    max_pos_speed: int = 250 # mm/s
-    # Others: Calibration angles, joint directions etc.
+class PikaTeleopConfig(TeleoperatorConfig):
+    # robot_ip to connect to the arm
+    robot_ip: str = None
+    # Port to connect to the pika
+    port: str = None
+    frequency: int = 100 # hz
+    use_gripper: bool = True
+    scale_xyz: float = 1.0 #
+    rx_continuous: bool = False
